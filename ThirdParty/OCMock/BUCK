@@ -1,0 +1,10 @@
+prebuilt_cxx_library(
+  name = 'OCMock',
+  visibility = ['PUBLIC'],
+
+  lib_dir = '.',
+  header_namespace = 'OCMock',
+  exported_headers = subdir_glob([
+    ('OCMock', '*.h'),
+  ])
+)

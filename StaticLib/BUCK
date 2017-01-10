@@ -1,0 +1,22 @@
+foundation = '$SDKROOT/System/Library/Frameworks/Foundation.framework'
+xctest = '$PLATFORM_DIR/Developer/Library/Frameworks/XCTest.framework'
+
+apple_library(
+  name = 'StaticLib',
+
+  exported_headers = glob(['StaticLib/*.h']),
+  srcs = glob(['StaticLib/*.m']),
+  frameworks = [foundation],
+  preprocessor_flags = ['-fobjc-arc'],
+  tests = [':StaticLibTests'],
+)
+
+apple_test(
+  name = 'StaticLibTests',
+  deps = [':StaticLib', '//ThirdParty/OCMock:OCMock'],
+
+  srcs = glob(['StaticLibTests/*.m']),
+  frameworks = [foundation, xctest],
+  preprocessor_flags = ['-fobjc-arc'],
+  info_plist = 'StaticLibTests/Info.plist',
+)
