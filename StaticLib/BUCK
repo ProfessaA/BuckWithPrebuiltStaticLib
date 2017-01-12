@@ -13,10 +13,19 @@ apple_library(
 
 apple_test(
   name = 'StaticLibTests',
-  deps = [':StaticLib', '//ThirdParty/OCMock:OCMock'],
 
   srcs = glob(['StaticLibTests/*.m']),
+
+  # dependencies
+  deps = [
+    ':StaticLib', 
+    '//ThirdParty/OCMock:OCMock',
+  ],
   frameworks = [foundation, xctest],
+  libraries = ['Libs/libOCMock.a'],
+
+  # config
+  linker_flags = ['-ObjC'],
   preprocessor_flags = ['-fobjc-arc'],
   info_plist = 'StaticLibTests/Info.plist',
 )
